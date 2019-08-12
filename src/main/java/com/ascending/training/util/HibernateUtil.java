@@ -52,6 +52,7 @@ import org.slf4j.LoggerFactory;
 
                 }
                 catch (Exception e) {
+ //                   e.printStackTrace();
                     logger.debug(e.getMessage());
                 }
             }

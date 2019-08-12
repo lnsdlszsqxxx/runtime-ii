@@ -16,6 +16,7 @@ public class HibernateMappingTestDepartment {
     @Test
     public void mappingTest() {
         String hql = "FROM Department"; //hibernate query
+//        List<Department> departments = null;
         List<Department> departments = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Department> query = session.createQuery(hql);
@@ -25,12 +26,10 @@ public class HibernateMappingTestDepartment {
             logger.error(e.getMessage());
         }
 
-
         Assert.assertNotNull(departments);
 
         logger.info(departments.toString());
 
-
-
     }
+
 }

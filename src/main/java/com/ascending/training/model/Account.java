@@ -17,10 +17,20 @@ public class Account {
     @Column(name = "balance")
     private float balance;
 
-    @Column(name = "employee_id")
-    private int employeeId;
+//    @Column(name = "employee_id")
+//    private int employeeId;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    private Employee employee;
 
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }

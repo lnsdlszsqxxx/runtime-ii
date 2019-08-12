@@ -1,6 +1,7 @@
 package com.ascending.training.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -54,6 +55,19 @@ public class Department {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Employee> employees;
+
+
+    public List<Employee> getEmployee() {
+        return employees;
+    }
+
+    public void setEmployee(List<Employee> employee) {
+        this.employees = employee;
     }
 
     @Override

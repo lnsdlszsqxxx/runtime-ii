@@ -37,5 +37,6 @@ public class HibernateMappingTestAccount {
 
         Assert.assertNotNull(accounts);
 
+
     }
 }

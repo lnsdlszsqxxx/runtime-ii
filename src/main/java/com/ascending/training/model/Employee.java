@@ -2,6 +2,7 @@ package com.ascending.training.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -29,8 +30,8 @@ public class Employee {
     @Column(name = "address")
     private String  address;
 
-    @Column(name = "department_id")
-    private int department_id;
+//    @Column(name = "department_id")
+//    private int department_id;
 
     public int getId() {
         return id;
@@ -80,13 +81,22 @@ public class Employee {
         this.address = address;
     }
 
-    public int getDepartment_id() {
-        return department_id;
-    }
+//    public int getDepartment_id() {
+//        return department_id;
+//    }
+//
+//    public void setDepartment_id(int department_id) {
+//        this.department_id = department_id;
+//    }
 
-    public void setDepartment_id(int department_id) {
-        this.department_id = department_id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private Department department;
+
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Account> accounts;
+
 
     @Override
     public String toString() {
@@ -97,7 +107,7 @@ public class Employee {
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
-                ", department_id=" + department_id +
+ //               ", department_id=" + department_id +
                 '}';
     }
 
@@ -108,7 +118,7 @@ public class Employee {
         if (!(o instanceof Employee)) return false;
         Employee employee = (Employee) o;
         return id == employee.id &&
-                department_id == employee.department_id &&
+  //              department_id == employee.department_id &&
                 name.equals(employee.name) &&
                 first_name.equals(employee.first_name) &&
                 last_name.equals(employee.last_name) &&
@@ -118,7 +128,7 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, first_name, last_name, email, address, department_id);
+        return Objects.hash(id, name, first_name, last_name, email, address);
     }
 }
 

@@ -7,13 +7,14 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.jvm.hotspot.utilities.Assert;
 
 import java.util.List;
 
 
 public class DepartmentDaoImpl implements DepartmentDao{
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public boolean save(Department department){
@@ -55,6 +56,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
         if (isSuccess) logger.debug(String.format("update done %s", department.toString()));
 
         return isSuccess;
+
     }
 
 
@@ -104,7 +106,8 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
         if (deptName == null) return null;
 
-        String hql = "FREOM Department as dept where lower(dept.name) = :name"; //change all letters to lower case;
+ //       String hql = "FROM Department as dept where lower(dept.name) = :name"; //change all letters to lower case;
+        String hql = "FROM Department as dept left join fetch dept.employees where lower(dept.name) = :name";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Department> query = session.createQuery(hql);
