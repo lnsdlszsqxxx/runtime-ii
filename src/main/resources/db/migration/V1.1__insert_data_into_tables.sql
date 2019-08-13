@@ -7,17 +7,27 @@ insert into department (name, description, location) values
 commit;
 
 insert into employee (name, first_name, last_name, email, address, department_id) values
-('lyu', 'Liang', 'Yu', 'davey.wang@ascending.com', '123 Fairfax, VA 22030', 1),
-('mli', 'Moming', 'Li', 'ryo.hang@ascending.com', '456 Vienna, VA 22030', 2),
-('yli', 'Yun', 'Li', 'gloria.zhang@ascending.com', '789 Dunn Loring, VA 22030', 2),
-('fyang', 'Guangyang', 'Fang', 'xingyue.Hang@ascending.com', '234 Burk, VA 22030', 1);
+('lyu', 'Liang', 'Yu', 'lyu@gmu.edu', '123 Sideburn Rd', 1),
+('mli', 'Moming', 'Li', 'mli@gmu.edu', '123 Sideburn Rd', 3),
+('yli', 'Yun', 'Li', 'yli@gmu.edu', '123 Sideburn Rd', 2),
+('fyang', 'Guangyang', 'Fang', 'gfang@gmu.edu', '111 Burke Lake Rd', 1),
+('jlong','Jiao','Long','jlong@gmu.edu','234 Braddock Rd',4),
+('jwang','Junxiang','Wang','jwang@gmu.edu','123 Sideburn Rd',4);
 
 commit;
 
 insert into account(account_type, balance, employee_id) values
-('checking', 123.23, 1),
-('saving', 234.34, 2),
-('checking', 345.45, 3),
-('saving', 456.56, 4);
+('checking', 900.00, 1),
+('saving', 910.00, 1),
+('checking', 700.00, 2),
+('saving', 710.00, 2),
+('checking',600.00, 3),
+('saving', 610.00, 3),
+('checking', 500.00, 4),
+('saving', 510.00, 4),
+('checking', 400.00, 5),
+('saving', 410.00, 5),
+('checking', 300.00, 6),
+('saving', 310.00, 6);
 
 commit;

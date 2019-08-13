@@ -41,9 +41,12 @@ CREATE TABLE account (
    employee_id    INTEGER NOT NULL
 );
 ALTER TABLE account ADD CONSTRAINT account_pk PRIMARY KEY ( id );
+
+
 ALTER TABLE account
    ADD CONSTRAINT account_employee_fk FOREIGN KEY ( employee_id )
        REFERENCES employee ( id );
+
 ALTER TABLE employee
    ADD CONSTRAINT employee_department_fk FOREIGN KEY ( department_id )
        REFERENCES department ( id );
