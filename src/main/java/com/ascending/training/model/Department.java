@@ -5,7 +5,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name="department")
+@Table(name="departments")
 public class Department {
 
     public Department() {}
@@ -59,15 +59,15 @@ public class Department {
 
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Employee> employees;
+    private List<Student> students;
 
 
-    public List<Employee> getEmployee() {
-        return employees;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setEmployee(List<Employee> employee) {
-        this.employees = employee;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     @Override

@@ -18,13 +18,13 @@ public class DepartmentDaoImplTest {
         departmentDaoTemp = new DepartmentDaoImpl();
     }
 
-    @Test
-    public void getDepartmentsTest(){
-        Department department = departmentDaoTemp.getDepartmentByName("GIS");
-//        Department department = DepartmentDaoImpl.getDepartmentByName("CS");
-        System.out.println(department.getDescription()); //left join
-        Assert.assertEquals(department.getDescription(), "Geography and GeoInformation Science");
-    }
+//    @Test
+//    public void getDepartmentsTest(){
+//        Department department = departmentDaoTemp.getDepartmentByName("GIS");
+////        Department department = DepartmentDaoImpl.getDepartmentByName("CS");
+//        System.out.println(department.getDescription()); //left join
+//        Assert.assertEquals(department.getDescription(), "Geography and GeoInformation Science");
+//    }
 
     @Test
     public void getDepartmentByNameTest(){

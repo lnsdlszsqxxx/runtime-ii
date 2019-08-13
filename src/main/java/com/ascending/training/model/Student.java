@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "employee")
-public class Employee {
+@Table(name = "students")
+public class Student {
 
-    public Employee(){}
+    public Student(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //to use this, id has to be SERIAL type in sql script
@@ -94,13 +94,13 @@ public class Employee {
     private Department department;
 
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Account> accounts;
 
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", first_name='" + first_name + '\'' +
@@ -115,15 +115,15 @@ public class Employee {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        Employee employee = (Employee) o;
-        return id == employee.id &&
-  //              department_id == employee.department_id &&
-                name.equals(employee.name) &&
-                first_name.equals(employee.first_name) &&
-                last_name.equals(employee.last_name) &&
-                email.equals(employee.email) &&
-                address.equals(employee.address);
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return id == student.id &&
+  //              department_id == student.department_id &&
+                name.equals(student.name) &&
+                first_name.equals(student.first_name) &&
+                last_name.equals(student.last_name) &&
+                email.equals(student.email) &&
+                address.equals(student.address);
     }
 
     @Override

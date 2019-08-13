@@ -6,17 +6,17 @@ insert into department (name, description, location) values
 
 commit;
 
-insert into employee (name, first_name, last_name, email, address, department_id) values
+insert into student (name, first_name, last_name, email, address, department_id) values
 ('lyu', 'Liang', 'Yu', 'lyu@gmu.edu', '123 Sideburn Rd', 1),
 ('mli', 'Moming', 'Li', 'mli@gmu.edu', '123 Sideburn Rd', 3),
 ('yli', 'Yun', 'Li', 'yli@gmu.edu', '123 Sideburn Rd', 2),
 ('fyang', 'Guangyang', 'Fang', 'gfang@gmu.edu', '111 Burke Lake Rd', 1),
-('jlong','Jiao','Long','jlong@gmu.edu','234 Braddock Rd',4),
+('ljiao','Long','Jiao','ljiao@gmu.edu','234 Braddock Rd',4),
 ('jwang','Junxiang','Wang','jwang@gmu.edu','123 Sideburn Rd',4);
 
 commit;
 
-insert into account(account_type, balance, employee_id) values
+insert into account(account_type, balance, student_id) values
 ('checking', 900.00, 1),
 ('saving', 910.00, 1),
 ('checking', 700.00, 2),

@@ -1,6 +1,6 @@
 package com.ascending.training.repository;
 
-import com.ascending.training.model.Employee;
+import com.ascending.training.model.Student;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 
-public class HibernateMappingTestEmployee {
+public class HibernateMappingTestStudent {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -22,10 +22,10 @@ public class HibernateMappingTestEmployee {
     public void Test(){
 
         String hql = "FROM Employee";
-        List<Employee> myemployee = null;
+        List<Student> myemployee = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Employee> query = session.createQuery(hql);
+            Query<Student> query = session.createQuery(hql);
             myemployee = query.list();
         }
         catch (Exception e){

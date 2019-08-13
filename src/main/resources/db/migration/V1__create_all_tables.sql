@@ -1,13 +1,13 @@
 DROP TABLE IF EXISTS department CASCADE;
-DROP TABLE IF EXISTS employee CASCADE;
+DROP TABLE IF EXISTS student CASCADE;
 DROP TABLE IF EXISTS account CASCADE;
 
 DROP SEQUENCE IF EXISTS department_id_seq;
-DROP SEQUENCE IF EXISTS employee_id_seq;
+DROP SEQUENCE IF EXISTS student_id_seq;
 DROP SEQUENCE IF EXISTS account_id_seq;
 
 CREATE SEQUENCE department_id_seq START WITH 1;
-CREATE SEQUENCE employee_id_seq START WITH 1;
+CREATE SEQUENCE student_id_seq START WITH 1;
 CREATE SEQUENCE account_id_seq START WITH 1;
 
 CREATE TABLE department (
@@ -20,8 +20,8 @@ CREATE TABLE department (
 ALTER TABLE department ADD CONSTRAINT department_pk PRIMARY KEY ( id );
 
 
-CREATE TABLE employee (
---    id              INTEGER NOT NULL default nextval('employee_id_seq'),
+CREATE TABLE student (
+--    id              INTEGER NOT NULL default nextval('student_id_seq'),
    id SERIAL NOT NULL,
    name            VARCHAR(30) not null unique,
    first_name      VARCHAR(30),
@@ -30,7 +30,7 @@ CREATE TABLE employee (
    address         VARCHAR(150),
    department_id   INTEGER NOT NULL
 );
-ALTER TABLE employee ADD CONSTRAINT employee_pk PRIMARY KEY ( id );
+ALTER TABLE student ADD CONSTRAINT student_pk PRIMARY KEY ( id );
 
 
 CREATE TABLE account (
@@ -38,15 +38,15 @@ CREATE TABLE account (
    id SERIAL NOT NULL,
    account_type   VARCHAR(30),
    balance        NUMERIC(10, 2),
-   employee_id    INTEGER NOT NULL
+   student_id    INTEGER NOT NULL
 );
 ALTER TABLE account ADD CONSTRAINT account_pk PRIMARY KEY ( id );
 
 
 ALTER TABLE account
-   ADD CONSTRAINT account_employee_fk FOREIGN KEY ( employee_id )
-       REFERENCES employee ( id );
+   ADD CONSTRAINT account_student_fk FOREIGN KEY ( student_id )
+       REFERENCES student ( id );
 
-ALTER TABLE employee
-   ADD CONSTRAINT employee_department_fk FOREIGN KEY ( department_id )
+ALTER TABLE student
+   ADD CONSTRAINT student_department_fk FOREIGN KEY ( department_id )
        REFERENCES department ( id );

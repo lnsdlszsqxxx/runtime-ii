@@ -4,7 +4,7 @@ package com.ascending.training.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
 
     @Id
@@ -22,15 +22,15 @@ public class Account {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
-    private Employee employee;
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private Student student;
 
 
-    public Employee getEmployee() {
-        return employee;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
