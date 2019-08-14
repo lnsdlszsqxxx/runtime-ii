@@ -41,8 +41,6 @@ public class DepartmentDaoImplTest {
 //    }
 
 
-
-
     @Test
     public void getDepartmentByNameTest(){
         Department department = departmentDaoTemp.getDepartmentByName("MS");
