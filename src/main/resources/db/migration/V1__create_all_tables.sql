@@ -12,7 +12,7 @@ CREATE SEQUENCE account_id_seq START WITH 1;
 
 CREATE TABLE department (
 --    id                INTEGER NOT NULL default nextval('department_id_seq'),
-   id SERIAL NOT NULL,
+   id BIGSERIAL NOT NULL,
    name              VARCHAR(30) not null unique,
    description       VARCHAR(150),
    location          VARCHAR(100)
@@ -22,7 +22,7 @@ ALTER TABLE department ADD CONSTRAINT department_pk PRIMARY KEY ( id );
 
 CREATE TABLE student (
 --    id              INTEGER NOT NULL default nextval('student_id_seq'),
-   id SERIAL NOT NULL,
+   id BIGSERIAL NOT NULL,
    name            VARCHAR(30) not null unique,
    first_name      VARCHAR(30),
    last_name       VARCHAR(30),
@@ -35,7 +35,7 @@ ALTER TABLE student ADD CONSTRAINT student_pk PRIMARY KEY ( id );
 
 CREATE TABLE account (
 --    id             INTEGER NOT NULL default nextval('account_id_seq'),
-   id SERIAL NOT NULL,
+   id BIGSERIAL NOT NULL,
    account_type   VARCHAR(30),
    balance        NUMERIC(10, 2),
    student_id    INTEGER NOT NULL

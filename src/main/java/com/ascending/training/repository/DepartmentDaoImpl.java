@@ -84,7 +84,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
             logger.error(e.getMessage());
         }
 
-        logger.debug(String.format("Department %s was deleted", deptName));
+        logger.info(String.format("Department %s was deleted", deptName));
 
         return deletedCount >= 1 ? true:false ;
     }

@@ -13,7 +13,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //to use this, id has to be SERIAL type in sql script
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -33,11 +33,11 @@ public class Student {
 //    @Column(name = "department_id")
 //    private int department_id;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

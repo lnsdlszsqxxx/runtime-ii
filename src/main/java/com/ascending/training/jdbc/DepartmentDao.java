@@ -45,7 +45,7 @@ public class DepartmentDao {
                 String description = rs.getString("description");
                 //Fill the object
                 Department department = new Department();
-                department.setId(id);
+                //department.setId(id);
                 department.setName(name);
                 department.setLocation(location);
                 department.setDescription(description);

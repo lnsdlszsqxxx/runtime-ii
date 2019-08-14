@@ -3,6 +3,8 @@ package com.ascending.training.model;
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 
 @Entity
 @Table(name="departments")
@@ -14,7 +16,7 @@ public class Department {
 //    @SequenceGenerator(name = "department_id_generator", sequenceName = "department_id_seq", allocationSize = 1)
 //    @GeneratedValue(strategy = SEQUENCE, generator = "department_id_generator")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //to use this, id has to be SERIAL type in sql script
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -25,12 +27,8 @@ public class Department {
     @Column(name = "location")
     private String location;
 
-    public int getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -32,7 +32,7 @@ public class DepartmentDaoTest {
 
         List<Department> departments = departmentDao.getDepartments();
 //        int expectedNumOfDept = 5;
-        int i=0;
+        Long i=0L;
 
         for (Department department: departments){
 
