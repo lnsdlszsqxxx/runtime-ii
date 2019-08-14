@@ -33,4 +33,14 @@ public class Account {
     public void setStudent(Student student) {
         this.student = student;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", accountType='" + accountType + '\'' +
+                ", balance=" + balance +
+                ", student=" + student +
+                '}';
+    }
 }

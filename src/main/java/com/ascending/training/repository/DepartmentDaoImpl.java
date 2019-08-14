@@ -106,17 +106,14 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
         if (deptName == null) return null;
 
- //       String hql = "FROM Department as dept where lower(dept.name) = :name"; //change all letters to lower case;
-        String hql = "FROM Department as dept left join fetch dept.students where lower(dept.name) = :name";
+        String hql = "FROM Department as dept where lower(dept.name) = :name"; //change all letters to lower case;
+
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Department> query = session.createQuery(hql);
             query.setParameter("name", deptName.toLowerCase());
 
-            Department department = query.uniqueResult(); //
-            logger.debug(department.toString());
-
-            return department;
+            return query.uniqueResult();
         }
 
     }
