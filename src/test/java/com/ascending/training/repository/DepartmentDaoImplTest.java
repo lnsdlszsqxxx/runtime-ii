@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class DepartmentDaoImplTest {
 
     private DepartmentDaoImpl departmentDaoTemp;
@@ -32,13 +34,21 @@ public class DepartmentDaoImplTest {
         Assert.assertTrue( departmentDaoTemp.delete("MS","Exploring Hall") );
     }
 
-//    @Test
-//    public void getDepartmentsTest(){
-//        Department department = departmentDaoTemp.getDepartmentByName("GIS");
-////        Department department = DepartmentDaoImpl.getDepartmentByName("CS");
-//        System.out.println(department.getDescription()); //left join
-//        Assert.assertEquals(department.getDescription(), "Geography and GeoInformation Science");
-//    }
+    @Test
+    public  void updateTest(){
+        Department department = departmentDaoTemp.getDepartmentByName("MS");
+        department.setDescription("Miss you");
+        departmentDaoTemp.update(department);
+
+        Department department1 = departmentDaoTemp.getDepartmentByName("MS");
+        Assert.assertEquals(department1.getDescription(),"Miss you");
+    }
+
+    @Test
+    public void getDepartmentsTest(){
+        List<Department> departments = departmentDaoTemp.getDepartments();
+        System.out.println(departments);
+    }
 
 
     @Test
