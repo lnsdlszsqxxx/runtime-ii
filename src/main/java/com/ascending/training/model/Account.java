@@ -17,14 +17,30 @@ public class Account {
     @Column(name = "balance")
     private float balance;
 
-//    @Column(name = "employee_id")
-//    private int employeeId;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
 
     public Student getStudent() {
         return student;
@@ -40,7 +56,7 @@ public class Account {
                 "id=" + id +
                 ", accountType='" + accountType + '\'' +
                 ", balance=" + balance +
-                ", student=" + student +
+                ", student=" + student.getId() +
                 '}';
     }
 }

@@ -16,13 +16,13 @@ public class Student {
     private Long id;
 
     @Column(name = "name")
-    private String name;
+    private String stName;
 
     @Column(name = "first_name")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
 
     @Column(name = "email")
     private String  email;
@@ -33,36 +33,40 @@ public class Student {
 //    @Column(name = "department_id")
 //    private int department_id;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private Department department;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Account> accounts;
+
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getStName() {
+        return stName;
     }
 
-    public String getName() {
-        return name;
+    public void setStName(String name) {
+        this.stName = name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -81,30 +85,26 @@ public class Student {
         this.address = address;
     }
 
-//    public int getDepartment_id() {
-//        return department_id;
-//    }
-//
-//    public void setDepartment_id(int department_id) {
-//        this.department_id = department_id;
-//    }
 
-    @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
-    private Department department;
+    public Department getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Account> accounts;
-
+    public List<Account> getAccounts() {
+        return accounts;
+    }
 
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
+                ", name='" + stName + '\'' +
+                ", first_name='" + firstName + '\'' +
+                ", last_name='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
  //               ", department_id=" + department_id +
@@ -119,16 +119,16 @@ public class Student {
         Student student = (Student) o;
         return id == student.id &&
   //              department_id == student.department_id &&
-                name.equals(student.name) &&
-                first_name.equals(student.first_name) &&
-                last_name.equals(student.last_name) &&
+                stName.equals(student.stName) &&
+                firstName.equals(student.firstName) &&
+                lastName.equals(student.lastName) &&
                 email.equals(student.email) &&
                 address.equals(student.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, first_name, last_name, email, address);
+        return Objects.hash(id, stName, firstName, lastName, email, address);
     }
 }
 

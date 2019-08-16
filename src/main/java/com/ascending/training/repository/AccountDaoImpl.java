@@ -1,17 +1,16 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Account;
+import com.ascending.training.model.Student;
 import com.ascending.training.util.HibernateUtil;
-import com.github.fluent.hibernate.H;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.omg.PortableInterceptor.ACTIVE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.channels.SeekableByteChannel;
 import java.util.List;
-
 
 public class AccountDaoImpl implements AccountDao {
 
@@ -59,15 +58,17 @@ public class AccountDaoImpl implements AccountDao {
 
         }
 
-        if(isSuccess) logger.info(String.format( "update is done! New record is %s", account.toString()) );
+        if(isSuccess) logger.info(String.format( "update is done! New record is %s", account.toString() ) );
 
         return  isSuccess;
     }
 
     @Override
-    public boolean delete(String accountType){
+    public boolean deleteAccountByStudentAndType(Student student, String accountType){
 
-        String hql = "DELETE Account WHERE account_type = :accountTypePlaceHolder";
+        String hql = "DELETE Account WHERE student = :studentPlaceHolder AND accountType = :accountTypePlaceHolder";
+
+
         Transaction transaction = null;
         int deleteCount = 0;
 
@@ -75,6 +76,7 @@ public class AccountDaoImpl implements AccountDao {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
 
             Query<Account>  query = session.createQuery(hql);
+            query.setParameter("studentPlaceHolder", student);
             query.setParameter("accountTypePlaceHolder", accountType);
 
             transaction = session.beginTransaction();
@@ -87,9 +89,9 @@ public class AccountDaoImpl implements AccountDao {
             logger.info(e.getMessage());
         }
 
-        logger.info(String.format("Account %s was deleted", accountType));
+        if(deleteCount>0) logger.info(String.format("Account %s was deleted", accountType));
 
-        return deleteCount>=1 ? true:false;
+        return deleteCount>0 ? true:false;
 
     }
 
@@ -107,15 +109,33 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account getAccountByName(String accountName){
+    public List<Account> getAccountsByStudent(Student student){
 
-        if(accountName == null) return null;
+        if(student == null) return null;
 
-        String hql = "FROM Account WHERE lower(account_type) = :accountNamePlaceHolder";
+        String hql = "FROM Account WHERE student = :studentPlaceHolder";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Account> query = session.createQuery(hql);
-            query.setParameter("accountNamePlaceHolder", accountName.toLowerCase());
+            query.setParameter("studentPlaceHolder", student);
+
+            return query.list();
+        }
+
+    }
+
+    @Override
+    public Account getAccountByStudentAndType(Student student, String accountType){
+
+        if(student == null) return null;
+
+        String hql = "FROM Account WHERE student = :st AND accountType = :at";
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+
+            Query<Account> query = session.createQuery(hql);
+            query.setParameter("st", student);
+            query.setParameter("at",accountType);
 
             return query.uniqueResult();
         }

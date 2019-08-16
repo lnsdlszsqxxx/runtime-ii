@@ -27,6 +27,9 @@ public class Department {
     @Column(name = "location")
     private String location;
 
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Student> students;
+
     public Long getId() {
         return id;
     }
@@ -55,17 +58,8 @@ public class Department {
         this.location = location;
     }
 
-
-    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Student> students;
-
-
     public List<Student> getStudents() {
         return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
     }
 
     @Override

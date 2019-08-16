@@ -62,7 +62,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
 
     @Override
-    public boolean delete(String deptName, String location){
+    public boolean deleteDepartmentByNameAndLocation(String deptName, String location){
 
         String hql = "DELETE Department where name = :deptName1 and location = :location1"; //place holder,
         int deletedCount = 0;
@@ -84,7 +84,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
             logger.error(e.getMessage());
         }
 
-        logger.info(String.format("Department %s was deleted", deptName));
+        if(deletedCount>0) logger.info(String.format("Department %s was deleted", deptName));
 
         return deletedCount >= 1 ? true:false ;
     }

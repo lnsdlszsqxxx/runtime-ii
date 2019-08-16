@@ -31,7 +31,7 @@ public class DepartmentDaoImplTest {
 
     @After
     public void teardown(){
-        Assert.assertTrue( departmentDaoTemp.delete("MS","Exploring Hall") );
+        Assert.assertTrue( departmentDaoTemp.deleteDepartmentByNameAndLocation("MS","Exploring Hall") );
     }
 
     @Test
