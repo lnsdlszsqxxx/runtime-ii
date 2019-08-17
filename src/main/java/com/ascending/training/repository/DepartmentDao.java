@@ -10,6 +10,7 @@ public interface DepartmentDao {
     boolean deleteDepartmentByNameAndLocation(String deptName, String location);
     List<Department> getDepartments();
     Department getDepartmentByName(String deptName);
+    Department getDepartmentStudentsAccountsByDeptName(String deptName);
 //    List<Object[]> getDepartmentAndEmployees(String deptName);
 //    List<Object[]> getDepartmentAndEmployees(String deptName);
 }

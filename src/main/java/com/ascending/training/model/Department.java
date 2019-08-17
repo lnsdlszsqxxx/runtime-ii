@@ -2,6 +2,7 @@ package com.ascending.training.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -28,7 +29,7 @@ public class Department {
     private String location;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Student> students;
+    private Set<Student> students;
 
     public Long getId() {
         return id;
@@ -58,7 +59,7 @@ public class Department {
         this.location = location;
     }
 
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 

@@ -54,9 +54,19 @@ public class DepartmentDaoImplTest {
     @Test
     public void getDepartmentByNameTest(){
         Department department = departmentDaoTemp.getDepartmentByName("MS");
-//        Department department = DepartmentDaoImpl.getDepartmentByName("CS");
-        System.out.println(department.getDescription()); //left join
+
+        System.out.println(department.getDescription());
         Assert.assertEquals(department.getDescription(), "Mathematical Sciences");
+    }
+
+    @Test
+    public void getDepartmentStudentsAccountsByNameTest(){
+        Department department = departmentDaoTemp.getDepartmentStudentsAccountsByDeptName("CS");
+
+        logger.info(department.toString());
+        logger.info(department.getStudents().toString());
+        logger.info(department.getStudents().stream().findFirst().get().getAccounts().toString());
+        Assert.assertEquals(department.getDescription(), "Computer Science");
     }
 
 }

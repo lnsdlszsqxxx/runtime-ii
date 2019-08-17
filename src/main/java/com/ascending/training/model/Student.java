@@ -4,6 +4,7 @@ package com.ascending.training.model;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "students")
@@ -38,7 +39,7 @@ public class Student {
     private Department department;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Account> accounts;
+    private Set<Account> accounts;
 
 
     public Long getId() {
@@ -94,7 +95,7 @@ public class Student {
         this.department = department;
     }
 
-    public List<Account> getAccounts() {
+    public Set<Account> getAccounts() {
         return accounts;
     }
 

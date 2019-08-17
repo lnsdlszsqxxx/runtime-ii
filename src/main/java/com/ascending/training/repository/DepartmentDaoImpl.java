@@ -119,6 +119,28 @@ public class DepartmentDaoImpl implements DepartmentDao{
     }
 
 
+    @Override
+    public Department getDepartmentStudentsAccountsByDeptName(String deptName){
+
+        if (deptName == null) return null;
+
+        //To use this hql, you must use Set in Model class, you cannot use List
+        String hql = "FROM Department as dept " +
+                "left join fetch dept.students as st " +
+                "left join fetch st.accounts " +
+                "where lower(dept.name) = :name"; //change all letters to lower case;
+
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Department> query = session.createQuery(hql);
+            query.setParameter("name", deptName.toLowerCase());
+
+            return query.uniqueResult();
+        }
+
+    }
+
+
 
 //    departments.forEach(dept -> System.out.println(dept));
 }
