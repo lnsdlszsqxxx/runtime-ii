@@ -97,7 +97,9 @@ public class DepartmentDaoImpl implements DepartmentDao{
     @Override
     public List<Department> getDepartments(){
 
-        String hql = "FROM Department";
+        String hql = "FROM Department as dept "+
+                "left join fetch dept.students as st "+
+                "left join fetch st.accounts ";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Department> query = session.createQuery(hql);

@@ -1,5 +1,7 @@
 package com.ascending.training.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +29,7 @@ public class Department {
 
     @Column(name = "location")
     private String location;
+
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Student> students;

@@ -18,9 +18,9 @@ public class DepartmentService {
     boolean deleteDepartmentByNameAndLocation(String deptName, String location){
         return departmentDao.deleteDepartmentByNameAndLocation(deptName,location);
     }
-    List<Department> getDepartments(){return departmentDao.getDepartments();}
-    Department getDepartmentByName(String deptName){return departmentDao.getDepartmentByName(deptName);}
-    Department getDepartmentStudentsAccountsByDeptName(String deptName){
+    public List<Department> getDepartments(){return departmentDao.getDepartments();}
+    public Department getDepartmentByName(String deptName){return departmentDao.getDepartmentByName(deptName);}
+    public Department getDepartmentStudentsAccountsByDeptName(String deptName){
         return departmentDao.getDepartmentStudentsAccountsByDeptName(deptName);
     }
 }

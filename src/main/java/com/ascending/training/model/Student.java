@@ -1,6 +1,8 @@
 package com.ascending.training.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +36,8 @@ public class Student {
 //    @Column(name = "department_id")
 //    private int department_id;
 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
