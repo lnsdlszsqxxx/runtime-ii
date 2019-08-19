@@ -9,12 +9,19 @@ import org.hibernate.query.Query;
 import org.omg.PortableInterceptor.ACTIVE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class AccountDaoImpl implements AccountDao {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private StudentDao studentDao;
 
     @Override
     public boolean save(Account account){

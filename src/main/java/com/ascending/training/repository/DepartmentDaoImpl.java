@@ -7,11 +7,12 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import sun.jvm.hotspot.utilities.Assert;
 
 import java.util.List;
 
-
+@Repository
 public class DepartmentDaoImpl implements DepartmentDao{
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -69,7 +70,11 @@ public class DepartmentDaoImpl implements DepartmentDao{
         Transaction transaction = null;
 
 
+
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
+
+//            Department department = getDepartmentByName(deptName);
+//            session.delete(department);
 
             Query<Department> query = session.createQuery(hql);
             query.setParameter("deptName1", deptName); //replace deptName1 by deptName
