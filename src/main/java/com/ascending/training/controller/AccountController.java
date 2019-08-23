@@ -1,6 +1,7 @@
 package com.ascending.training.controller;
 
 import com.ascending.training.model.Account;
+import com.ascending.training.model.Counter;
 import com.ascending.training.model.Department;
 import com.ascending.training.model.Student;
 import com.ascending.training.service.AccountService;
@@ -27,15 +28,13 @@ public class AccountController {
     @Autowired
     StudentService studentService;
 
-//    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public List<Account> getAccounts(){
-//        return accountService.getAccounts();
-//    }
-
-    @GetMapping(value = "", produces = MediaType.APPLICATION_XML_VALUE)
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Account> getAccounts(){
+        Counter.counterStAcc=0;
+        Counter.counterAccSt=0;
         return accountService.getAccounts();
     }
+
 
     @GetMapping(value = "/{stName}",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Account> getAccountsByStName(@PathVariable(name = "stName") String stName){

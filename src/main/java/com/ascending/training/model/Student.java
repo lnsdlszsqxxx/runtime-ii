@@ -2,14 +2,15 @@ package com.ascending.training.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "students")
+@JsonInclude(value = JsonInclude.Include.NON_NULL) //ignore null value.
 public class Student {
 
     public Student(){}
@@ -42,7 +43,7 @@ public class Student {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Account> accounts;
 
@@ -105,18 +106,23 @@ public class Student {
 //    }
 
     public Set<Account> getAccounts() {
-        try{int size = accounts.size();} //no particular purpose, just try to use accounts
-        //When accounts is accessed, Hibernate will try to get the data (LAZY).
-        //But at this time, session is closed, so there will be an exception.
-        //As a result:
-        //if accounts doesn't exit (not fetched by HQL), it throws an exception. Then in catch, it returns null;
-        //if accounts does exit (when join fetch is used), nothing is changed. It will return accounts at the end.
-        catch (Exception e) {
-            return null;
+        if(Counter.counterAccSt==0) {
+            try {
+                int size = accounts.size();
+            } //no particular purpose, just try to use accounts
+            //When accounts is accessed, Hibernate will try to get the data (LAZY).
+            //But at this time, session is closed, so there will be an exception.
+            //As a result:
+            //if accounts doesn't exit (not fetched by HQL), it throws an exception. Then in catch, it returns null;
+            //if accounts does exit (when join fetch is used), nothing is changed. It will return accounts at the end.
+            catch (Exception e) {
+                return null;
+            }
+
+            Counter.counterStAcc += 1;
+            return accounts;
         }
-
-        return accounts;
-
+        else {return null;}
     }
 
     @Override

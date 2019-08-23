@@ -1,5 +1,6 @@
 package com.ascending.training.controller;
 
+import com.ascending.training.model.Counter;
 import com.ascending.training.model.Student;
 import com.ascending.training.service.StudentService;
 import org.slf4j.Logger;
@@ -22,6 +23,8 @@ public class StudentController {
 
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Student> getStudents(){
+        Counter.counterStAcc=0;
+        Counter.counterAccSt=0;
         return  studentService.getStudents();
     }
 

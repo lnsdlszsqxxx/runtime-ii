@@ -53,6 +53,13 @@
       <artifactId>jackson-dataformat-xml</artifactId>
     </dependency>
 
+<!--  do not display null value for Json format-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.7.9.1</version>
+    </dependency>
+
 <!--    <dependency>-->
 <!--      <groupId>org.slf4j</groupId>-->
 <!--      <artifactId>slf4j-simple</artifactId>-->
