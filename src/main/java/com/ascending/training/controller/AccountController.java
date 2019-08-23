@@ -1,6 +1,7 @@
 package com.ascending.training.controller;
 
 import com.ascending.training.model.Account;
+import com.ascending.training.model.Department;
 import com.ascending.training.model.Student;
 import com.ascending.training.service.AccountService;
 import com.ascending.training.service.StudentService;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = {"/accounts","/accs"})
@@ -37,7 +40,6 @@ public class AccountController {
     @GetMapping(value = "/{stName}",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Account> getAccountsByStName(@PathVariable(name = "stName") String stName){
         Student student = studentService.getStudentByName(stName);
-        System.out.println(student.toString());
         return accountService.getAccountsByStudent(student);
     }
 
@@ -83,6 +85,15 @@ public class AccountController {
         else msg = msg + " Failed!";
 
         return msg;
+    }
+
+    @PostMapping(value = "/twoObjects", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public List<Student> twoObjects(@RequestBody Wrapper wrapper){
+        ;
+        Department department = wrapper.getDepartment();
+        System.out.println(department.toString());
+        System.out.println(wrapper.getStudents().toString());
+        return wrapper.getStudents();
     }
 
 }

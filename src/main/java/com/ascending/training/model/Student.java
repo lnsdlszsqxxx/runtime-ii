@@ -37,12 +37,12 @@ public class Student {
 //    @Column(name = "department_id")
 //    private int department_id;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
-//    @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Account> accounts;
 
