@@ -30,18 +30,19 @@ public class Student {
     @Column(name = "email")
     private String  email;
 
+
     @Column(name = "address")
     private String  address;
 
 //    @Column(name = "department_id")
 //    private int department_id;
 
-
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
+//    @JsonIgnore
     @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Account> accounts;
 
@@ -99,8 +100,23 @@ public class Student {
         this.department = department;
     }
 
+//    public Set<Account> getAccounts() {
+//        return accounts;
+//    }
+
     public Set<Account> getAccounts() {
+        try{int size = accounts.size();} //no particular purpose, just try to use accounts
+        //When accounts is accessed, Hibernate will try to get the data (LAZY).
+        //But at this time, session is closed, so there will be an exception.
+        //As a result:
+        //if accounts doesn't exit (not fetched by HQL), it throws an exception. Then in catch, it returns null;
+        //if accounts does exit (when join fetch is used), nothing is changed. It will return accounts at the end.
+        catch (Exception e) {
+            return null;
+        }
+
         return accounts;
+
     }
 
     @Override

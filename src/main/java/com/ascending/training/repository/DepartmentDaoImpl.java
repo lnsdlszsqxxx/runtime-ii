@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import sun.jvm.hotspot.utilities.Assert;
 
 import java.util.List;
 
@@ -74,7 +73,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
 
 //            Department department = getDepartmentByName(deptName);
-//            session.delete(department);
+//            session.delete(department); //this will delete everything in the child's table.
 
             Query<Department> query = session.createQuery(hql);
             query.setParameter("deptName1", deptName); //replace deptName1 by deptName
@@ -97,9 +96,19 @@ public class DepartmentDaoImpl implements DepartmentDao{
     @Override
     public List<Department> getDepartments(){
 
+        //add JsonIgnore before ManyToOne in front of departments in Student Class
+        //So student (child) will not fetch department (father)
         String hql = "FROM Department as dept "+
                 "left join fetch dept.students as st "+
                 "left join fetch st.accounts ";
+
+//        String hql = "FROM Department as dept "+
+//                "left join dept.students as st "+
+//                "left join st.accounts ";
+
+//        //add JsonIgnore before OneToMany in front of students
+//        String hql = "FROM Department";
+
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Department> query = session.createQuery(hql);
@@ -113,7 +122,9 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
         if (deptName == null) return null;
 
-        String hql = "FROM Department as dept where lower(dept.name) = :name"; //change all letters to lower case;
+        String hql = "FROM Department as dept " +
+                "left join fetch dept.students as st " +
+                "left join fetch st.accounts where lower(dept.name) = :name"; //change all letters to lower case;
 
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {

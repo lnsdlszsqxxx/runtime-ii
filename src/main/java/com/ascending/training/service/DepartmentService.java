@@ -13,9 +13,9 @@ public class DepartmentService {
     @Autowired //DI
     private DepartmentDao departmentDao;
 
-    boolean save(Department department){return departmentDao.save(department);}
-    boolean update(Department department){return departmentDao.update(department);}
-    boolean deleteDepartmentByNameAndLocation(String deptName, String location){
+    public boolean save(Department department){return departmentDao.save(department);}
+    public boolean update(Department department){return departmentDao.update(department);}
+    public boolean deleteDepartmentByNameAndLocation(String deptName, String location){
         return departmentDao.deleteDepartmentByNameAndLocation(deptName,location);
     }
     public List<Department> getDepartments(){return departmentDao.getDepartments();}
@@ -23,4 +23,5 @@ public class DepartmentService {
     public Department getDepartmentStudentsAccountsByDeptName(String deptName){
         return departmentDao.getDepartmentStudentsAccountsByDeptName(deptName);
     }
+
 }

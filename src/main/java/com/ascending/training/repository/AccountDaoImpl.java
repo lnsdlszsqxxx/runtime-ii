@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class AccountDaoImpl implements AccountDao {
@@ -106,11 +107,13 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public List<Account> getAccounts(){
 
-        String hql = "FROM Account";
+        String hql = "FROM Account as ac " +
+                "left join fetch ac.student as st " +
+                "left join fetch st.department";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Account> query = session.createQuery(hql);
-            return query.list();
+            return query.list().stream().distinct().collect(Collectors.toList());
         }
 
     }
@@ -118,7 +121,15 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public List<Account> getAccountsByStudent(Student student){
 
-        if(student == null) return null;
+        if(student == null) {
+            logger.info("student is null!");
+            return null;
+        }
+
+//        String hql = "FROM Account as ac " +
+//                "left join fetch ac.student as st " +
+//                "left join fetch st.department " +
+//                "WHERE student = :studentPlaceHolder";
 
         String hql = "FROM Account WHERE student = :studentPlaceHolder";
 
@@ -136,7 +147,8 @@ public class AccountDaoImpl implements AccountDao {
 
         if(student == null) return null;
 
-        String hql = "FROM Account WHERE student = :st AND accountType = :at";
+        String hql = "FROM Account " +
+                "WHERE student = :st AND accountType = :at";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
 

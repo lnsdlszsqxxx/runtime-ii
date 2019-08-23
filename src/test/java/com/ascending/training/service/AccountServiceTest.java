@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class) //So we don't need JUnit
 @SpringBootTest(classes = AppInitializer.class)
 public class AccountServiceTest {
 

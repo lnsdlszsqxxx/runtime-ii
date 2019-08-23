@@ -2,6 +2,7 @@ package com.ascending.training.repository;
 
 import com.ascending.training.model.Student;
 import com.ascending.training.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -9,7 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class StudentDaoImpl implements StudentDao {
@@ -40,14 +42,14 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public boolean deleteStudentByName(String studentName){
-        String hql = "DELETE Student WHERE stName = :namePlaceHolder";
+        String hql = "DELETE Student WHERE stName like :namePlaceHolder";
         Transaction transaction = null;
         int deleteCount =0;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
 
             Query<Student> query = session.createQuery(hql);
-            query.setParameter("namePlaceHolder", studentName);
+            query.setParameter("namePlaceHolder", studentName+"%");
 
             transaction = session.beginTransaction();
             deleteCount = query.executeUpdate();
@@ -92,18 +94,37 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public List<Student> getStudents(){
 
-        String hql = "FROM Student";
+        String hql = "FROM Student AS st " +
+                "left join fetch st.accounts " +
+                "left join fetch st.department";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Student> query = session.createQuery(hql);
-            List<Student> students = query.list();
+//            List<Student> students = query.list();
+//            return students;
+
+            //no repeated results, method 1
+//            List<Student> students = query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+//            return students;
+
+            //method 2
+            List<Student> students = query.list().stream().distinct().collect(Collectors.toList());
             return students;
+
+//            //method 3
+//            Set<Student> set = new HashSet<>(students);
+//            List<Student> students1 = new ArrayList<>(set);
+//            return students1;
+
         }
     }
 
     @Override
     public Student getStudentByName(String studentName){
-        String hql = "FROM Student AS st WHERE lower(st.stName) = :namePlaceHolder";
+        String hql = "FROM Student AS st " +
+                "left join fetch st.accounts " +
+                "left join fetch st.department " +
+                "where lower(st.stName) = :namePlaceHolder";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Student> query = session.createQuery(hql);

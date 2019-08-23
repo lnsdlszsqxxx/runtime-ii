@@ -14,18 +14,10 @@ public class AccountService {
     @Autowired
     private AccountDao accountDao;
 
-    boolean save(Account account){return accountDao.save(account);}
-    boolean deleteAccountByStudentAndType(Student student, String accountType){
-        return accountDao.deleteAccountByStudentAndType(student,accountType);
-    }
-    boolean update(Account account){return accountDao.update(account);}
-    List<Account> getAccounts(){
-        return accountDao.getAccounts();
-    }
-    List<Account> getAccountsByStudent(Student student){
-        return accountDao.getAccountsByStudent(student);
-    }
-    Account getAccountByStudentAndType(Student student, String accountType){
-        return accountDao.getAccountByStudentAndType(student,accountType);
-    }
+    public boolean save(Account account){return accountDao.save(account);}
+    public boolean deleteAccountByStudentAndType(Student student, String accountType){return accountDao.deleteAccountByStudentAndType(student,accountType);}
+    public boolean update(Account account){return accountDao.update(account);}
+    public List<Account> getAccounts(){return accountDao.getAccounts();}
+    public List<Account> getAccountsByStudent(Student student){return accountDao.getAccountsByStudent(student);}
+    public Account getAccountByStudentAndType(Student student, String accountType){return accountDao.getAccountByStudentAndType(student,accountType);}
 }

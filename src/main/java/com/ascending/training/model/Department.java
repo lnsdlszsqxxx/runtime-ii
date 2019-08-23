@@ -30,7 +30,7 @@ public class Department {
     @Column(name = "location")
     private String location;
 
-
+//    @JsonIgnore
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Student> students;
 

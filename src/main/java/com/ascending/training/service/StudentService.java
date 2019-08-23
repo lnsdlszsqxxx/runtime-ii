@@ -13,10 +13,9 @@ public class StudentService {
     @Autowired
     private StudentDao studentDao;
 
-    boolean save(Student student){return studentDao.save(student);}
-    boolean deleteStudentByName(String studentName){return studentDao.deleteStudentByName(studentName);}
-    boolean update(Student student){return studentDao.update(student);}
-    List<Student> getStudents(){return studentDao.getStudents();}
-    Student getStudentByName(String studentName){return studentDao.getStudentByName(studentName);}
-
+    public boolean save(Student student){return studentDao.save(student);}
+    public boolean deleteStudentByName(String studentName){return studentDao.deleteStudentByName(studentName);}
+    public boolean update(Student student){return studentDao.update(student);}
+    public List<Student> getStudents(){return studentDao.getStudents();}
+    public Student getStudentByName(String studentName){return studentDao.getStudentByName(studentName);}
 }
