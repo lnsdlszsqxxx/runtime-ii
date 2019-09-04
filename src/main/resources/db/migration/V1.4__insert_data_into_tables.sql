@@ -1,7 +1,7 @@
 INSERT INTO role (name, allowed_resource, allowed_read, allowed_create, allowed_update, allowed_delete) VALUES
 ('Admin', '/', 'Y', 'Y', 'Y', 'Y'),
-('Manager', '/depts,/departments,/employees,/ems,/acnts,/accounts', 'Y', 'Y', 'Y', 'N'),
-('user', '/employees,/ems,/acnts,/accounts', 'Y', 'N', 'N', 'N')
+('Manager', '/depts,/departments,/students,/sts,/accs,/accounts', 'Y', 'Y', 'Y', 'N'),
+('user', '/students,/sts,/accs,/accounts', 'Y', 'N', 'N', 'N')
 ;
 COMMIT;
 

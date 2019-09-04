@@ -37,8 +37,6 @@ public class Role {
     private List<User> users;
 
 
-
-
     public Long getId() {
         return id;
     }
@@ -55,7 +53,7 @@ public class Role {
         this.name = name;
     }
 
-    public String isAllowedResource() {
+    public String getAllowedResource() {
         return allowedResource;
     }
 

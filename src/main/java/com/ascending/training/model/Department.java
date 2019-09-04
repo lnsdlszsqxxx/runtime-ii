@@ -39,6 +39,7 @@ public class Department {
     }
 
     public String getName() {
+        System.out.println("department gets name");
         return name;
     }
 

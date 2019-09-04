@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +49,7 @@ public class DepartmentController {
     public String creatDepartments(@RequestBody List<Department> departments){
         logger.info("Department: "+departments.toString());
         boolean isSuccess=true;
+
 
 
         for (Department department: departments
