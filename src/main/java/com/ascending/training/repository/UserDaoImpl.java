@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.OrderBy;
@@ -14,7 +15,8 @@ import javax.persistence.OrderBy;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    Logger logger;
 
     @Override
     public boolean save(User user){

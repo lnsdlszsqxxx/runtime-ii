@@ -3,6 +3,8 @@ import com.ascending.training.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +14,8 @@ import java.io.PrintWriter;
 
 @WebFilter(filterName = "securityFilter", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST})
 public class SecurityFilter implements Filter {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    Logger logger;
     private static String AUTH_URI = "/auth";
 
     @Override
@@ -29,12 +32,12 @@ public class SecurityFilter implements Filter {
 
         logger.info("This is from SecurityFilter"+req.getMethod()+": "+req.getRequestURL());
 
-        System.out.println("This is from Security filter before");
-        filterChain.doFilter(request, response);
-        System.out.println("This is from Security filter after");
+//        System.out.println("This is from Security filter before");
+//        filterChain.doFilter(request, response);
+//        System.out.println("This is from Security filter after");
 
-//        if (statusCode == HttpServletResponse.SC_ACCEPTED) filterChain.doFilter(request, response);
-//        else ((HttpServletResponse)response).sendError(statusCode);
+        if (statusCode == HttpServletResponse.SC_ACCEPTED) filterChain.doFilter(request, response);
+        else ((HttpServletResponse)response).sendError(statusCode);
 
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping(value = {"/students", "/sts"})
 public class StudentController {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired Logger logger;
 
     @Autowired
     private StudentService studentService;

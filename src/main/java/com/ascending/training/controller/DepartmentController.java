@@ -14,7 +14,8 @@ import java.util.List;
 @RequestMapping(value = {"/departments", "/depts"})   //find the position of controller
 public class DepartmentController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private Logger logger;
 
     @Autowired
     private DepartmentService departmentService; //like front desk offers services.

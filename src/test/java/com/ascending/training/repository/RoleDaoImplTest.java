@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(classes = AppInitializer.class)
 public class RoleDaoImplTest {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired Logger logger;
 
     @Autowired
     RoleDaoImpl roleDao;

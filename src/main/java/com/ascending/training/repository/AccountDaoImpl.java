@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 @Repository
 public class AccountDaoImpl implements AccountDao {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private Logger logger;
 
     @Autowired
     private StudentDao studentDao;

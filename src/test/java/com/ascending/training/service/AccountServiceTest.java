@@ -21,7 +21,7 @@ import java.util.List;
 @SpringBootTest(classes = AppInitializer.class)
 public class AccountServiceTest {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired Logger logger;
 
     @Autowired
     private AccountService accountService;

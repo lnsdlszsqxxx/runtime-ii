@@ -4,6 +4,7 @@ import com.ascending.training.model.Department;
 import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -11,7 +12,8 @@ public class DepartmentDaoTest {
 
 
     private DepartmentDao departmentDao;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private Logger logger;
 
 
     @Before

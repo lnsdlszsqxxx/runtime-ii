@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Repository
 public class StudentDaoImpl implements StudentDao {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    Logger logger;
 
     @Override
     public boolean save(Student student){

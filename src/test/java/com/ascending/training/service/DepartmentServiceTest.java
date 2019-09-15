@@ -22,7 +22,7 @@ public class DepartmentServiceTest {
 
         @Autowired //so you don't need new DepartmentService() on the right hand side;
         private DepartmentService departmentService;
-        private Logger logger = LoggerFactory.getLogger(this.getClass());
+        @Autowired private Logger logger;
 
         @Before
         public void setup(){

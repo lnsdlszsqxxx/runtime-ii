@@ -20,7 +20,7 @@ import java.util.Map;
 @RequestMapping(value = {"/accounts","/accs"})
 public class AccountController {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired Logger logger;
 
     @Autowired
     AccountService accountService;
