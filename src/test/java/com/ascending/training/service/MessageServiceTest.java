@@ -39,7 +39,7 @@ public class MessageServiceTest {
     public void sendMessageTest(){
         String [] input = {"1","2","3","4","5","6"};
         for (int i=0;i<input.length;i++){
-            messageService.sendMessage(queueName,input[i],"group1");
+            messageService.sendMessage(queueName,input[i]);
         }
     }
 
@@ -67,6 +67,16 @@ public class MessageServiceTest {
 
     @Test
     public void deleteQueueTest(){
-        messageService.deleteQueue("MyFifoQueue.fifo");
+        messageService.deleteQueue("queue.fifo");
     }
+
+    @Test
+    public void sendEmailTest(){
+        String fromEmail = "lyueiroughfpqi4@gmu.edu";
+        String toEmail = "lnsdlszsqxxx@163.com";
+        String subject = "My first send grid email";
+        String contentString = "this is fun!";
+        messageService.sendEmail(fromEmail,toEmail, subject,contentString);
+    }
+
 }

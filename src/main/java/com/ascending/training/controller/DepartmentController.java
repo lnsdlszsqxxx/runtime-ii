@@ -50,18 +50,13 @@ public class DepartmentController {
     public String creatDepartments(@RequestBody List<Department> departments){
         logger.info("Department: "+departments.toString());
         boolean isSuccess=true;
-
-
+        String msg = "The departments were created.";
 
         for (Department department: departments
              ) {
            isSuccess = departmentService.save(department);
-           if(!isSuccess) break;
+           if(!isSuccess) {msg = "The department was not created."; break;}
         }
-
-
-        String msg = "The department was created.";
-        if(!isSuccess) msg = "The department was not created.";
 
         return msg;
     }

@@ -2,10 +2,18 @@ package com.ascending.training.service;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.*;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,7 +123,7 @@ public class MessageService {
     public List<Message> receiveMessages(String queueName) {
         String queueUrl = getQueueUrl(queueName);
         ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(queueUrl);
-        receiveMessageRequest.setMaxNumberOfMessages(10);
+        receiveMessageRequest.setMaxNumberOfMessages(1);
         receiveMessageRequest.setWaitTimeSeconds(20);
 
         // Uncomment the following to provide the ReceiveRequestDeduplicationId
@@ -136,4 +144,26 @@ public class MessageService {
         amazonSQS.deleteQueue(new DeleteQueueRequest(getQueueUrl(queueName)));
     }
 
+    public void sendEmail(String fromEmail, String toEmail, String subject, String contentString){
+        Email from = new Email(fromEmail);
+        Email to = new Email(toEmail);
+        Content content = new Content("text/plain", contentString);
+        Mail mail = new Mail(from,subject,to,content);
+
+        SendGrid sendGrid = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+        Request request = new Request();
+
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+
+            Response response = sendGrid.api(request);
+            logger.info("Status code is "+response.getStatusCode());
+            logger.info("Body is "+response.getBody());
+            logger.info("Header is "+response.getHeaders());
+        }catch (IOException e){
+            logger.error(e.getMessage());
+        }
+    }
 }
