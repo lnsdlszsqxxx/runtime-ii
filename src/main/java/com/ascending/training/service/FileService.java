@@ -26,7 +26,9 @@ public class FileService {
 
     public void createBucket(String bucketName){
         if(amazonS3.doesBucketExistV2(bucketName)) {logger.info("bucketName already exists"); return;}
-            amazonS3.createBucket(bucketName);
+
+        logger.info("creating a bucket named as "+bucketName);
+        amazonS3.createBucket(bucketName);
     }
 
     public void deleteBucket(String bucketName){

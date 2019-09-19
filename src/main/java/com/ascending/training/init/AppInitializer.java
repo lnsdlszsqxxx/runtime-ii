@@ -13,13 +13,15 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer; //to use Tomcat
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 
 
 @SpringBootApplication(scanBasePackages = {"com.ascending.training"})
 @ServletComponentScan(basePackages = {"com.ascending.training.filter"})
-public class AppInitializer {
+public class AppInitializer extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(AppInitializer.class, args);
     }
@@ -28,9 +30,11 @@ public class AppInitializer {
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public Logger logger(InjectionPoint injectionPoint){
+//        return LoggerFactory.getLogger(this.getClass());
         return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
     }
 
+    //this is a singleton
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public AmazonS3 getAmazonS3(){
@@ -41,6 +45,7 @@ public class AppInitializer {
                 .build();
     }
 
+    //this is a singleton
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public AmazonSQS getAmazonSQS(){
