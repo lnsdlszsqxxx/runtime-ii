@@ -40,11 +40,9 @@ public class FileServiceMockAWSTest {
     @Autowired @Spy
     Logger logger;
 
-//    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+//    @Mock
     AmazonS3 amazonS3;
-
-
 
     @InjectMocks
     FileService fileService;
@@ -65,7 +63,7 @@ public class FileServiceMockAWSTest {
 
         when(amazonS3.generatePresignedUrl(any())).thenReturn(URLName);
         when(amazonS3.doesObjectExist(anyString(), anyString())).thenReturn(false);
-        
+
     }
 
     @After

@@ -24,6 +24,11 @@ public class FileService {
 
     @Autowired private AmazonS3 amazonS3;
 
+    public String mockitoDoReturnWhenTest(String t){
+        logger.info("from mockitoDoReturnWhenTest");
+        return t;
+    }
+
     public void createBucket(String bucketName){
         if(amazonS3.doesBucketExistV2(bucketName)) {logger.info("bucketName already exists"); return;}
 
