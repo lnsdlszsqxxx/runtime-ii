@@ -3,6 +3,7 @@ package com.ascending.training.service;
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
+import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -136,6 +137,35 @@ public class FileService {
             logger.error(e.getMessage());
             return;
         }
+
+        return;
+
+    }
+
+    public void myUploadMultipartFiles(String bucketName, List<MultipartFile> multipartFiles){
+
+            try {
+
+                for(MultipartFile multipartFile:multipartFiles) {
+                    System.out.println(multipartFile.getOriginalFilename());
+                    System.out.println(multipartFile.getName());
+                    System.out.println(multipartFile.getResource());
+
+                    if (amazonS3.doesObjectExist(bucketName, multipartFile.getOriginalFilename())) {
+                        logger.info(String.format("File %s already exists", multipartFile.getOriginalFilename()));
+                        return;
+                    }
+
+                    ObjectMetadata objectMetadata = new ObjectMetadata();
+                    objectMetadata.setContentType(multipartFile.getContentType());
+                    objectMetadata.setContentLength(multipartFile.getSize());
+                    amazonS3.putObject(bucketName, multipartFile.getOriginalFilename(), multipartFile.getInputStream(), objectMetadata);
+                }
+
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                return;
+            }
 
         return;
 

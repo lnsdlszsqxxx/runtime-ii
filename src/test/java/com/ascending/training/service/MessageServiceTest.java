@@ -32,7 +32,7 @@ public class MessageServiceTest {
 
     @Test
     public void createQueueTest(){
-        messageService.createQueue(queueName);
+        messageService.createQueue("standardqueue");
     }
 
     @Test

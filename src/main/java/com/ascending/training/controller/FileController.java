@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -59,6 +60,41 @@ public class FileController {
             logger.error(e.getMessage());
         }
         return responseEntity;
+    }
+
+
+
+    @PostMapping(value = "/uploadfiles/{bucketName}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public List<String> uploadFiles(@PathVariable(name = "bucketName") String bucketName, @RequestParam("file") List<MultipartFile> files){
+
+        List<String> outputMsg=new ArrayList<>();
+
+        if(!amazonS3.doesBucketExistV2(bucketName)) {
+            logger.info("Bucket "+bucketName+" does not exist");
+            return null;
+        }
+
+        try {
+
+                for(MultipartFile file:files) {
+                    String msg = String.format("The file name=%s, size=%d could not be uploaded.", file.getOriginalFilename(), file.getSize());
+
+                    String url = fileService.uploadFile(bucketName, file);
+                    logger.info(file.getOriginalFilename());
+                    if (url != null) {
+                        msg = String.format("The file name=%s, size=%d was uploaded, url=%s", file.getOriginalFilename(), file.getSize(), url);
+                        messageService.sendMessage(queueName, url, "group1");
+                    }
+                    outputMsg.add(msg);
+                    logger.info(msg);
+                }
+
+        }
+        catch (Exception e){
+            logger.info(e.getMessage());
+        }
+
+        return outputMsg;
     }
 
     @RequestMapping(value = "/{fileName}", method = RequestMethod.GET, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
