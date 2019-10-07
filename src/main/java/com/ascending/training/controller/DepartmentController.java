@@ -5,6 +5,8 @@ import com.ascending.training.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = {"/departments", "/depts"})   //find the position of controller
-public class DepartmentController {
+public class DepartmentController{
 
     @Autowired
     private Logger logger;
@@ -28,38 +30,39 @@ public class DepartmentController {
     }
 
     //{} means deptName is a variable
-    @GetMapping(value = "/{deptName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public Department getDepartmentByName(@PathVariable(name = "deptName") String deptName1){
+    @Cacheable(value = "departments")
+    @GetMapping(value = "/{deptname}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public Department getDepartmentByName(@PathVariable(name = "deptname") String deptName1){
         return  departmentService.getDepartmentByName(deptName1);
     }
-
-
-//    @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE})
-//    public String creatDepartment(@RequestBody Department department){
-//        logger.info("Department: "+department.toString());
-//
-//        boolean isSuccess =  departmentService.save(department);
-//
-//        String msg = "The department was created.";
-//        if(!isSuccess) msg = "The department was not created.";
-//
-//        return msg;
-//    }
-
+    
+    @CachePut(value = "departments", key = "#department.id", unless = "#department.name == null")
     @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public String creatDepartments(@RequestBody List<Department> departments){
-        logger.info("Department: "+departments.toString());
-        boolean isSuccess=true;
-        String msg = "The departments were created.";
+    public String creatDepartment(@RequestBody Department department){
+        logger.info("Department: "+department.toString());
 
-        for (Department department: departments
-             ) {
-           isSuccess = departmentService.save(department);
-           if(!isSuccess) {msg = "The department was not created."; break;}
-        }
+        boolean isSuccess = departmentService.save(department);
+
+        String msg = "The department was created.";
+        if(!isSuccess) msg = "The department was not created.";
 
         return msg;
     }
+
+//    @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE})
+//    public String creatDepartments(@RequestBody List<Department> departments){
+//        logger.info("Department: "+departments.toString());
+//        boolean isSuccess=true;
+//        String msg = "The departments were created.";
+//
+//        for (Department department: departments
+//             ) {
+//           isSuccess = departmentService.save(department);
+//           if(!isSuccess) {msg = "The department was not created."; break;}
+//        }
+//
+//        return msg;
+//    }
 
     @RequestMapping(value = "/{deptName}/{location}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String deleteDepartmentByNameAndLocation(@PathVariable(name = "deptName") String deptName,

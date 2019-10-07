@@ -4,7 +4,7 @@ import com.ascending.training.model.Department;
 
 import java.util.List;
 
-public interface DepartmentDao {
+public interface DepartmentDao{
     boolean save(Department department);
     boolean update(Department department);
     boolean deleteDepartmentByNameAndLocation(String deptName, String location);

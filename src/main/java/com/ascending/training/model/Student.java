@@ -1,17 +1,17 @@
 package com.ascending.training.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "students")
 @JsonInclude(value = JsonInclude.Include.NON_NULL) //ignore null value.
-public class Student {
+public class Student implements Serializable {
 
     public Student(){}
 

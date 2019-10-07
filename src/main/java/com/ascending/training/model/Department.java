@@ -3,6 +3,7 @@ package com.ascending.training.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name="departments")
-public class Department {
+public class Department implements Serializable {
 
     public Department() {}
 

@@ -8,12 +8,14 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public class DepartmentDaoImpl implements DepartmentDao{
+public class DepartmentDaoImpl implements DepartmentDao {
 
     @Autowired
     Logger logger;
