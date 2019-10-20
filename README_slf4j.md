@@ -16,6 +16,9 @@ In this method you don't need to extract the jar files.
 4. Run source file ```java -cp ".:slf4j-api-1.7.9.jar:slf4j-simple-1.7.9.jar:" testJar``` (double quotation marks are not necessary)
 
 References:
+
 [SLF4J official web site](http://www.slf4j.org/manual.html)
+
 [How to include jar files with java file and compile in command prompt](https://stackoverflow.com/questions/9395207/how-to-include-jar-files-with-java-file-and-compile-in-command-prompt)
+
 [Jar files in Java](https://www.geeksforgeeks.org/jar-files-java/)
