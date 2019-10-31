@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "accounts")
 @JsonInclude(value = JsonInclude.Include.NON_NULL) //don't show null value
-public class Account implements Serializable {
+public class Account {
 
 
     @Id

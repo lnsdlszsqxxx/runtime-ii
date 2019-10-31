@@ -12,9 +12,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name="departments")
-public class Department implements Serializable {
-
-    public Department() {}
+public class Department{
 
     @Id //mark primary key
 //    @SequenceGenerator(name = "department_id_generator", sequenceName = "department_id_seq", allocationSize = 1)
@@ -30,6 +28,16 @@ public class Department implements Serializable {
 
     @Column(name = "location")
     private String location;
+
+    public Department(){}
+
+    public Department(Long id, String name, String description, String location) {
+        this.id=id;
+        this.name=name;
+        this.description=description;
+        this.location=location;
+    }
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)

@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 
-@EnableCaching
+//@EnableCaching
 @SpringBootApplication(scanBasePackages = {"com.ascending.training"})
 @ServletComponentScan(basePackages = {"com.ascending.training.filter"})
 public class AppInitializer extends SpringBootServletInitializer {

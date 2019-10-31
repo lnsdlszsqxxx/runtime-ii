@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "students")
 @JsonInclude(value = JsonInclude.Include.NON_NULL) //ignore null value.
-public class Student implements Serializable {
+public class Student{
 
     public Student(){}
 
