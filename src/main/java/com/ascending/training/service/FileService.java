@@ -3,6 +3,8 @@ package com.ascending.training.service;
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
+import com.ascending.training.model.Department;
+import com.ascending.training.repository.DepartmentDaoImpl;
 import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,9 @@ public class FileService {
     @Autowired
     private Logger logger;
 
-    @Autowired private AmazonS3 amazonS3;
+    @Autowired
+    private AmazonS3 amazonS3;
+
 
     public String mockitoDoReturnWhenTest(String t){
         logger.info("from mockitoDoReturnWhenTest");
@@ -31,7 +35,10 @@ public class FileService {
     }
 
     public void createBucket(String bucketName){
-        if(amazonS3.doesBucketExistV2(bucketName)) {logger.info("bucketName already exists"); return;}
+        if(amazonS3.doesBucketExistV2(bucketName)) {
+            logger.info("bucketName already exists");
+            return;
+        }
 
         logger.info("creating a bucket named as "+bucketName);
         amazonS3.createBucket(bucketName);

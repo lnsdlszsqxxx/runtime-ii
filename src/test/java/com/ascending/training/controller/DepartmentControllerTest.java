@@ -62,6 +62,7 @@ public class DepartmentControllerTest {
         System.out.println(result.getResponse().getContentAsString());
         System.out.println(expected);
 
+        //strict=false means that not all the elements has to compare.
         JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
     }
 

@@ -2,6 +2,7 @@ package com.ascending.training.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.ascending.training.init.AppInitializer;
+import com.ascending.training.repository.DepartmentDaoImpl;
 import io.jsonwebtoken.lang.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -41,7 +42,6 @@ public class FileServiceMockAWSTest {
     Logger logger;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-//    @Mock
     AmazonS3 amazonS3;
 
     @InjectMocks
