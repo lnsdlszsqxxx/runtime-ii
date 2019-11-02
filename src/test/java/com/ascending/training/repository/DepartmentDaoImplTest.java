@@ -64,10 +64,10 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void getDepartmentByNameTest(){
-        Department department = departmentDaoTemp.getDepartmentByName("MS");
+        Department department = departmentDaoTemp.getDepartmentByName("CS");
 
         System.out.println(department.getDescription());
-        Assert.assertEquals(department.getDescription(), "Mathematical Sciences");
+        Assert.assertEquals(department.getDescription(), "Computer Science");
     }
 
     @Test
