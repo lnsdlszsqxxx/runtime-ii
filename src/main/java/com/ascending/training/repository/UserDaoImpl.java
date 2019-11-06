@@ -54,6 +54,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User getUserByUserNameEmail(String userName, String email){
+        String hql = "FROM User as u WHERE lower(u.email) = :emailPH AND u.name = :userNamePH";
+        try (Session session = HibernateUtil.getSessionFactory().openSession()){
+            Query<User> query = session.createQuery(hql);
+            query.setParameter("emailPH", email.toLowerCase());
+            query.setParameter("userNamePH", userName.toLowerCase());
+            return query.uniqueResult();
+        }
+    }
+
+    @Override
     public User getUserByCredentials(String email, String password){
         String hql = "FROM User as u WHERE lower(u.email) = :emailPH AND u.password = :passwordPH";
         try (Session session = HibernateUtil.getSessionFactory().openSession()){

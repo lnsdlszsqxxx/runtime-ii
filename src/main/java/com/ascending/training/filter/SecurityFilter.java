@@ -36,12 +36,11 @@ public class SecurityFilter implements Filter {
 
         logger.info("This is from SecurityFilter"+req.getMethod()+": "+req.getRequestURL());
 
-//        System.out.println("This is from Security filter before");
-//        filterChain.doFilter(request, response);
-//        System.out.println("This is from Security filter after");
+        System.out.println("This is from Security filter before"+statusCode);
 
         if (statusCode == HttpServletResponse.SC_ACCEPTED) filterChain.doFilter(request, response);
         else ((HttpServletResponse)response).sendError(statusCode);
+        System.out.println("This is from Security filter after");
 
     }
 
@@ -55,7 +54,8 @@ public class SecurityFilter implements Filter {
         int statusCode = HttpServletResponse.SC_UNAUTHORIZED;
         String uri = req.getRequestURI();
         String verb = req.getMethod();
-        if (uri.equalsIgnoreCase(AUTH_URI)) return HttpServletResponse.SC_ACCEPTED;
+//        if (uri.equalsIgnoreCase(AUTH_URI)) return HttpServletResponse.SC_ACCEPTED;
+        if (uri.matches("^"+AUTH_URI+".*")) return HttpServletResponse.SC_ACCEPTED;
         try {
             String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");
             if (token == null || token.isEmpty()) return statusCode;
@@ -74,10 +74,10 @@ public class SecurityFilter implements Filter {
                     break;
                 }
             }
-            logger.debug(String.format("Verb: %s, allowed resources: %s", verb, allowedResources));
+            logger.info(String.format("Security Filter authorization Verb: %s, allowed resources: %s", verb, allowedResources));
         }
         catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("Security Filter authorization Exception: "+e.getMessage());
         }
         return statusCode;
     }

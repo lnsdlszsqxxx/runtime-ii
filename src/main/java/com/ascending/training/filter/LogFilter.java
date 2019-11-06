@@ -15,11 +15,11 @@ public class LogFilter implements Filter {
         System.out.println("This is from Log filter before");
 
         //test listener
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpSession session = req.getSession(); //sessionCreated is executed
-        session.setAttribute("url", "mkyong.com"); //attributeAdded() is executed
-        session.setAttribute("url", "mkyong2.com"); //attributeReplaced() is executed
-        session.removeAttribute("url"); //attributeRemoved() is executed
+//        HttpServletRequest req = (HttpServletRequest) request;
+//        HttpSession session = req.getSession(); //sessionCreated is executed
+//        session.setAttribute("url", "mkyong.com"); //attributeAdded() is executed
+//        session.setAttribute("url", "mkyong2.com"); //attributeReplaced() is executed
+//        session.removeAttribute("url"); //attributeRemoved() is executed
 
         filterChain.doFilter(request,response);
         System.out.println("This is from Log filter after");

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
     @Autowired
     UserDao userDao;
 
@@ -19,7 +20,12 @@ public class UserService {
         return userDao.getUserByEmail(email);
     }
 
+    public User getUserByUserNameEmail(String userName, String email){
+        return userDao.getUserByUserNameEmail(userName, email);
+    }
+
     public User getUserByCredentials(String email,String password){
         return userDao.getUserByCredentials(email,password);
     }
+
 }

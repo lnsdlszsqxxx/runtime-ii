@@ -4,5 +4,6 @@ import com.ascending.training.model.User;
 public interface UserDao {
     boolean save(User user);
     User getUserByEmail(String email);
+    User getUserByUserNameEmail(String userName, String email);
     User getUserByCredentials(String email, String password);
 }

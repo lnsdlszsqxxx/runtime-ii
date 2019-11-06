@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Authentication</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <h1>Hello</h1>
+  <h2>Please insert user name and email:</h2>
+
+
+
+
+  <!-- <form name="myForm" action="http://localhost:8080/auth/frontend" method="get" target="_self" onsubmit="return validateForm()"> -->
+  <form name="myForm" method="get" target="_top" onsubmit="return validateForm()">
+  <fieldset>
+  <legend>Personal information:</legend>
+
+  userName:<br>
+  <input id="userName" type="text" name="userName" value="lyu" placeholder="lyu" autofocus>
+  <br>
+  <br>
+  userEmail:<br>
+  <input id="userEmail" type="text" name="userEmail" value="lyu4@gmu.edu" placeholder="lyu4@gmu.edu" required>
+  <br><br>
+  <input type="button" value="Submit" onclick="getToken()">
+  <input type="reset">
+
+  </fieldset>
+  </form>
+
+  <p id="text"></p>
+  <p id="token"></p>
+
+
+
+  <script>
+  function validateForm() {
+    var x = document.forms["myForm"]["UserName"].value;
+    var y = document.forms["myForm"]["UserEmail"].value;
+    if (x == "" || y=="") {
+      alert("Name or Email must be filled out");
+      return false;
+    }
+  }
+
+  function getToken() {
+  var xhttp;
+  var name =   document.getElementById("userName").value;
+  var email =  document.getElementById("userEmail").value;
+  var url="http://localhost:8080/auth/frontend?userName="+name+"&userEmail="+email;
+
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    document.getElementById("text").innerHTML = "Your token is:";
+    document.getElementById("token").innerHTML = "Error: readyState="+this.readyState+", status="+this.status+"<br> (This might be caused by CORS, fix: https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc?hl=en-US)";
+    if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("token").innerHTML = this.responseText;
+    }
+  };
+  // alert(url);
+  xhttp.open("GET", url, true);
+  xhttp.send();
+  }
+
+  </script>
+
+</body>
+
+</html>
