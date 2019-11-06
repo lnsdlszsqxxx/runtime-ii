@@ -44,6 +44,7 @@ public class FileServiceMockAWSTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     AmazonS3 amazonS3;
 
+    //@InjeckMocks (https://tedvinke.wordpress.com/2014/02/13/mockito-why-you-should-not-use-injectmocks-annotation-to-autowire-fields/
     @InjectMocks
     FileService fileService;
 
