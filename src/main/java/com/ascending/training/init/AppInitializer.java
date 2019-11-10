@@ -18,6 +18,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 //@EnableCaching
 @SpringBootApplication(scanBasePackages = {"com.ascending.training"})

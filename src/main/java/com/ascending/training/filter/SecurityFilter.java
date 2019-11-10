@@ -34,9 +34,9 @@ public class SecurityFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest)request;
         int statusCode = authorization(req);
 
-        logger.info("This is from SecurityFilter"+req.getMethod()+": "+req.getRequestURL());
+        logger.info("This is from SecurityFilter: "+req.getMethod()+": "+req.getRequestURL());
 
-        System.out.println("This is from Security filter before"+statusCode);
+        System.out.println("This is from Security filter before "+statusCode);
 
         if (statusCode == HttpServletResponse.SC_ACCEPTED) filterChain.doFilter(request, response);
         else ((HttpServletResponse)response).sendError(statusCode);
@@ -58,6 +58,7 @@ public class SecurityFilter implements Filter {
         if (uri.matches("^"+AUTH_URI+".*")) return HttpServletResponse.SC_ACCEPTED;
         try {
             String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");
+            System.out.println(token);
             if (token == null || token.isEmpty()) return statusCode;
             Claims claims = JwtUtil.decodeJwtToken(token);
             String allowedResources = "/";

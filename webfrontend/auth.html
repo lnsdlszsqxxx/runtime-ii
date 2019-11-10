@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Authentication</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<style media="screen">
+
+body{
+  background-image: url("https://images.unsplash.com/photo-1504280645497-00afe6a47e43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+
+  /* height: 100%; */
+  /* Center and scale the image nicely */
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#login_container {
+	width: 500px;
+	height: 280;
+	padding: 0px;
+	margin: auto;
+	position:fixed;
+	top: calc((100% - 450px) / 2);
+  left: calc((100% - 500px) / 2);
+}
+
+.dont-break-out {
+/* this class breaks the long token into multiple lines */
+
+/* These are technically the same, but use both */
+overflow-wrap: break-word;
+word-wrap: break-word;
+
+-ms-word-break: break-all;
+/* This is the dangerous one in WebKit, as it breaks things wherever */
+word-break: break-all;
+/* Instead use this non-standard one: */
+word-break: break-word;
+/*
+/* Adds a hyphen where the word breaks, if supported (No Blink) */
+/* -ms-hyphens: auto;
+-moz-hyphens: auto;
+-webkit-hyphens: auto;
+hyphens: auto; */
+}
+
+</style>
+
+<script>
+  function validateForm() {
+    var x = document.forms["myForm"]["UserName"].value;
+    var y = document.forms["myForm"]["UserEmail"].value;
+    if (x == "" || y=="") {
+      alert("Name or Email must be filled out");
+      return false;
+    }
+  }
+
+  function getToken() {
+  var xhttp;
+  var name =   document.getElementById("userName").value;
+  var email =  document.getElementById("userEmail").value;
+  var url="http://localhost:8080/auth/frontend?userName="+name+"&userEmail="+email;
+
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+
+    //reset output info
+    document.getElementById("loginSuccessfully").style.display = "none";
+    document.getElementById("loginFail").style.display = "none";
+
+
+    if (this.readyState == 4 && this.status == 200) {
+      var token=this.responseText;
+
+      //show token
+      document.getElementById("loginSuccessfully").style.display = "inline";
+      // document.getElementById("token").innerHTML="Your token is:<br><br>"+token;
+
+      //save token in localStorage
+      // window.localStorage.setItem('access_token', token);
+
+      //save token in cookies, expairing in one day
+      var d = new Date();
+      d.setTime(d.getTime() + (24*60*60*1000));
+      var expires = "expires="+ d.toUTCString();
+      document.cookie = 'same-site-cookie=foo; SameSite=Lax';
+      document.cookie = 'cross-site-cookie=bar; SameSite=none;Secure';
+      document.cookie = "access_token=" + token + ";"+expires+";path=/";
+
+      display = document.querySelector('#timer');
+      startTimer(5,display);
+    } else if(this.readyState == 4){
+      document.getElementById("loginFail").style.display = "inline";
+      document.getElementById("Error").innerHTML = "Error: readyState="+this.readyState+", status="+this.status+"<br> (This might be caused by CORS, fix: https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc?hl=en-US)";
+    }
+  };
+  // alert(url);
+  xhttp.open("GET", url, true);
+  xhttp.send();
+  }
+
+
+  function startTimer(duration, display) {
+      var timer = duration;
+      var minutes, seconds;
+      setInterval(function () {
+          minutes = parseInt(timer / 60, 10)
+          seconds = parseInt(timer % 60, 10);
+
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+
+          display.textContent = minutes + ":" + seconds;
+
+          //if timer is done
+          if (--timer < 0) {
+              // timer = duration;
+              //go to another page when timer ends
+              window.location.href = "getDepartment";
+          }
+      }, 1000);
+  }
+
+  //start time when window is loaded
+  // window.onload = function () {
+  //     var fiveMinutes =  5,
+  //         display = document.querySelector('#timer');
+  //     startTimer(fiveMinutes, display);
+  // };
+
+</script>
+
+
+<body>
+
+<div id='login_container'>
+  <div id="login_input" class="common_style">
+
+  <!-- <form name="myForm" action="http://localhost:8080/auth/frontend" method="get" target="_self" onsubmit="return validateForm()"> -->
+  <form name="myForm" method="get" target="_top" onsubmit="return validateForm()">
+  <fieldset>
+  <legend>Insert personal information:</legend>
+  userName:<br>
+  <input id="userName" type="text" name="userName" value="lyu" placeholder="lyu" autofocus>
+  <br>
+  <br>
+  userEmail:<br>
+  <input id="userEmail" type="text" name="userEmail" value="lyu4@gmu.edu" placeholder="lyu4@gmu.edu" required>
+  <br><br>
+  <input type="button" value="Submit" onclick="getToken()">
+  <input type="reset">
+  </fieldset>
+  </form>
+
+  </div>
+</div>
+
+<div id='loginSuccessfully' style='display:none'>
+    <h3>You have logged in successfully!</h3>
+    <p id="token" class="dont-break-out"></p>
+    <p id="jump">Jump to the get department page in <strong><span id="timer">00:05</span></strong> seconds.</p>
+</div>
+
+<div id='loginFail' style='display:none'>
+  <p id="Error"></p>
+</div>
+
+
+
+
+</body>
+
+</html>
