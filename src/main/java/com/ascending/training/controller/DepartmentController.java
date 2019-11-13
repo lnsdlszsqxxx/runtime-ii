@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = {"/departments", "/depts"})   //find the position of controller
-@CrossOrigin(value = "*", origins = "*", allowedHeaders = "*")
+//@CrossOrigin(value = "*", origins = "*", allowedHeaders = "*")
 public class DepartmentController{
 
     @Autowired

@@ -1,5 +1,6 @@
 package com.ascending.training.util;
 
+import com.ascending.training.Interceptor.HibernateInterceptor;
 import com.github.fluent.hibernate.cfg.scanner.EntityScanner;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -43,6 +44,8 @@ public class HibernateUtil {
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
   //              settings.put(Environment.HBM2DDL_AUTO,true); //check
                 configuration.setProperties(settings);
+
+                configuration.setInterceptor(new HibernateInterceptor());
 
                 EntityScanner.scanPackages(modelPackages).addTo(configuration); //scan mapping class and change configuration file accordingly
                                                                                 //so we need to add fluent-hibernate-core in pom.xml

@@ -1,5 +1,6 @@
 package com.ascending.training.repository;
 
+import com.ascending.training.Interceptor.HibernateInterceptor;
 import com.ascending.training.model.Department;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
@@ -17,15 +18,15 @@ import java.util.List;
 @Repository
 public class DepartmentDaoImpl implements DepartmentDao {
 
-    @Autowired
-    Logger logger;
+    @Autowired Logger logger;
 
     @Override
     public boolean save(Department department){
         Transaction transaction = null;
         boolean isSuccess = true;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+//        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = HibernateUtil.getSessionFactory().withOptions().interceptor(new HibernateInterceptor()).openSession()){
             transaction = session.beginTransaction();
             session.save(department);
             transaction.commit();
