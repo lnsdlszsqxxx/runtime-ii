@@ -49,8 +49,8 @@ public class AccountController {
         boolean isSuccess=true;
         Student student = studentService.getStudentByName(stName);
         Account account = accountService.getAccountByStudentAndType(student, accountType);
-        float oldBalance = account.getBalance();
-        float newBalance = oldBalance - Float.valueOf(amount);
+        double oldBalance = account.getBalance();
+        double newBalance = oldBalance - Float.valueOf(amount);
         account.setBalance(newBalance);
 
         if(newBalance<0) return "Current Balance is $" + oldBalance + ". Cannot withdraw $"+amount+".";
@@ -73,8 +73,8 @@ public class AccountController {
         Student student = studentService.getStudentByName(stName);
         Account account = accountService.getAccountByStudentAndType(student, accountType);
 
-        float oldBalance = account.getBalance();
-        float newBalance = oldBalance + Float.valueOf(amount);
+        double oldBalance = account.getBalance();
+        double newBalance = oldBalance + Float.valueOf(amount);
         account.setBalance(newBalance);
         isSuccess = accountService.update(account);
 

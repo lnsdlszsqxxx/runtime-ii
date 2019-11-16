@@ -2,6 +2,7 @@ package com.ascending.training.repository;
 
 import com.ascending.training.Interceptor.HibernateInterceptor;
 import com.ascending.training.model.Department;
+import com.ascending.training.model.Student;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class DepartmentDaoImpl implements DepartmentDao {
@@ -133,10 +135,15 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+//        try(Session session = HibernateUtil.getSessionFactory().withOptions().interceptor(new HibernateInterceptor()).openSession()) {
             Query<Department> query = session.createQuery(hql);
             query.setParameter("name", deptName.toLowerCase());
 
-            return query.uniqueResult();
+            Department department = query.uniqueResult();
+            Set<Student> s = department.getStudents();
+            s.stream().forEach(System.out::println);
+
+            return department;
         }
 
     }

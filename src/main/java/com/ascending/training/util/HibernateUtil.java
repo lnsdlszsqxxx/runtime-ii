@@ -42,7 +42,7 @@ public class HibernateUtil {
                 settings.put(Environment.PASS, dbPassword);
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-  //              settings.put(Environment.HBM2DDL_AUTO,true); //check
+//                settings.put(Environment.HBM2DDL_AUTO,"validate"); //check whether the schema is connected, and check other stuff.
                 configuration.setProperties(settings);
 
                 configuration.setInterceptor(new HibernateInterceptor());
@@ -57,8 +57,8 @@ public class HibernateUtil {
 
             }
             catch (Exception e) {
-//                   e.printStackTrace();
-                logger.debug(e.getMessage());
+                   e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         return sessionFactory;

@@ -76,20 +76,21 @@ hyphens: auto; */
 
     if (this.readyState == 4 && this.status == 200) {
       var token=this.responseText;
+      // alert(token);
 
       //show token
       document.getElementById("loginSuccessfully").style.display = "inline";
       // document.getElementById("token").innerHTML="Your token is:<br><br>"+token;
 
       //save token in localStorage
-      // window.localStorage.setItem('access_token', token);
+      window.localStorage.setItem('access_token', token);
 
       //save token in cookies, expairing in one day
       var d = new Date();
       d.setTime(d.getTime() + (24*60*60*1000));
       var expires = "expires="+ d.toUTCString();
-      document.cookie = 'same-site-cookie=foo; SameSite=Lax';
-      document.cookie = 'cross-site-cookie=bar; SameSite=none;Secure';
+      // document.cookie = 'same-site-cookie=foo; SameSite=Lax';
+      // document.cookie = 'cross-site-cookie=bar; SameSite=none;Secure';
       document.cookie = "access_token=" + token + ";"+expires+";path=/";
 
       display = document.querySelector('#timer');
@@ -121,7 +122,8 @@ hyphens: auto; */
           if (--timer < 0) {
               // timer = duration;
               //go to another page when timer ends
-              window.location.href = "getDepartment";
+              // window.location.href = "getDepartment";
+              window.location.href = "getDepartment_JQuery";
           }
       }, 1000);
   }

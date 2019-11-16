@@ -36,7 +36,7 @@ public class SecurityFilter implements Filter {
 
         logger.info("This is from SecurityFilter: "+req.getMethod()+": "+req.getRequestURL());
 
-        System.out.println("This is from Security filter before "+statusCode);
+        System.out.println("---------This is from Security filter before "+statusCode);
 
         if (statusCode == HttpServletResponse.SC_ACCEPTED) filterChain.doFilter(request, response);
         else ((HttpServletResponse)response).sendError(statusCode);

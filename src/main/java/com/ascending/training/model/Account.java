@@ -22,10 +22,10 @@ public class Account {
     private String accountType;
 
     @Column(name = "balance")
-    private float balance;
+    private double balance;
 
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
@@ -43,11 +43,11 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -77,7 +77,7 @@ public class Account {
                 "id=" + id +
                 ", accountType='" + accountType + '\'' +
                 ", balance=" + balance +
-                ", student=" + student.getId() +
-                '}';
+                ", student=" + (student == null? "null" : String.valueOf(student.getId())) +
+                "}";
     }
 }

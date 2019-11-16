@@ -1,0 +1,2 @@
+-- ALTER TABLE Accounts ALTER COLUMN balance type float;
+-- ALTER TABLE Accounts ALTER COLUMN student_id type bigint;

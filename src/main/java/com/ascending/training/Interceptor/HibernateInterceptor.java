@@ -1,6 +1,7 @@
 package com.ascending.training.Interceptor;
 
 
+import com.ascending.training.model.Department;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.type.Type;
 import org.slf4j.Logger;
@@ -17,12 +18,15 @@ public class HibernateInterceptor extends EmptyInterceptor {
 
     @Override
     public boolean onLoad(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types){
-        logger.info(">>>>>>>onload: "+entity.toString());
-        logger.info(">>>>>>>onload: "+id);
-        logger.info(">>>>>>>onload, state is the value of each column: "+Arrays.deepToString(state));
-        logger.info(">>>>>>>onload, property is column names: "+ Arrays.deepToString(propertyNames));
-        logger.info(">>>>>>>onload, type is the data type of column variable: "+ Arrays.deepToString(types));
+        logger.info(String.format(">>>>>>>onload1, %s,entity: %s", entity.getClass().getName(),entity.toString()));
+//        logger.info(">>>>>>>onload2, id: "+id);
+//        logger.info(">>>>>>>onload3, state is the value of each column: "+Arrays.deepToString(state));
+//        logger.info(">>>>>>>onload4, property is column names: "+ Arrays.deepToString(propertyNames));
+//        logger.info(">>>>>>>onload5, type is the data type of column variable: "+ Arrays.deepToString(types));
 
+        if(entity instanceof Department) {
+            //to do
+        }
         return false; //when the data is not changed
 //        return true; //when the data is changed
     }

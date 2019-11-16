@@ -32,6 +32,8 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.ascending.training.util.HibernateUtil;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InjectionPoint;
@@ -53,7 +55,6 @@ public class AppInitializer extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(AppInitializer.class, args);
     }
-
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
