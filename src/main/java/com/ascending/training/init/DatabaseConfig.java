@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DatabaseConfig {
 
-    //use this been to test the Hibernate validate
+    //use this been to invoke the Hibernate validate
     @Bean(name = "sessionFactory1")
     public SessionFactory getFactory1() throws Exception {
         SessionFactory sf = HibernateUtil.getSessionFactory();

@@ -28,7 +28,7 @@ CREATE TABLE student (
    last_name       VARCHAR(30),
    email           VARCHAR(50),
    address         VARCHAR(150),
-   department_id   INTEGER NOT NULL
+   department_id   BIGINT NOT NULL
 );
 ALTER TABLE student ADD CONSTRAINT student_pk PRIMARY KEY ( id );
 
@@ -37,8 +37,8 @@ CREATE TABLE account (
 --    id             INTEGER NOT NULL default nextval('account_id_seq'),
    id BIGSERIAL NOT NULL,
    account_type   VARCHAR(30),
-   balance        NUMERIC(10, 2),
-   student_id    INTEGER NOT NULL
+   balance        FLOAT,
+   student_id    BIGINT NOT NULL
 );
 ALTER TABLE account ADD CONSTRAINT account_pk PRIMARY KEY ( id );
 

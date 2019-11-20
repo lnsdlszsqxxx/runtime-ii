@@ -51,8 +51,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 //@EnableCaching
 @SpringBootApplication(scanBasePackages = {"com.ascending.training"})
 @ServletComponentScan(basePackages = {"com.ascending.training.filter"})
-public class AppInitializer extends SpringBootServletInitializer {
-    public static void main(String[] args) {
+public class AppInitializer extends SpringBootServletInitializer{
+    public static void main(String[] args) throws NullPointerException {
+//        if(HibernateUtil.getSessionFactory()==null) throw new NullPointerException("The Hibernate session factory is NULL!");
         SpringApplication.run(AppInitializer.class, args);
     }
 

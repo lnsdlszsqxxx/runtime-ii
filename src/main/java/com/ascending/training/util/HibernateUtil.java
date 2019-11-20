@@ -42,7 +42,7 @@ public class HibernateUtil {
                 settings.put(Environment.PASS, dbPassword);
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-//                settings.put(Environment.HBM2DDL_AUTO,"validate"); //check whether the schema is connected, and check other stuff.
+                settings.put(Environment.HBM2DDL_AUTO,"validate"); //check whether the schema is connected, and check other stuff.
                 configuration.setProperties(settings);
 
                 configuration.setInterceptor(new HibernateInterceptor());
