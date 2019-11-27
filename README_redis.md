@@ -18,15 +18,20 @@ A cache server is a dedicated network server or service acting as a server that 
 5.  Write-Back
 
 ## Run a redis server from docker
-Here, we use redis as a cache server and run it in docker.
+For demo purpose, we run a redis server locally in docker with the following two commands:
 ```
  docker pull redis
  docker run -p 6379:6379 --name some-redis redis
+```
+
+When the redis server is build successfully, you can access the server by the following command:
+```
  docker exec -it some-redis /bin/bash
 ```
 
 ## Some redis commands
 
+Once we access the server sucessfull, we can use the following commands:
 ```
  redis-cli keys *
  redis-cli FLUSHDB

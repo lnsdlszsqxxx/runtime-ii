@@ -36,7 +36,7 @@ public class DepartmentControllerTest {
 
     @Autowired
     private MockMvc mockMvc; //it needs @AutoConfigureMockMvc
-
+    //MockMVC allows us to test controller without Tomcat. It mocks the Tomcat.
 
     @MockBean
     private DepartmentService departmentService;
