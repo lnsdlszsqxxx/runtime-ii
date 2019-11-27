@@ -2,16 +2,14 @@ package com.ascending.training.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ascending.training.model.Student;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "accounts")
 @JsonInclude(value = JsonInclude.Include.NON_NULL) //don't show null value
-public class Account {
+public class Account implements Serializable{
 
 
     @Id

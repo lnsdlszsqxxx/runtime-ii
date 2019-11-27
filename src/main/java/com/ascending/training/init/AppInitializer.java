@@ -48,7 +48,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-//@EnableCaching
+@EnableCaching
 @SpringBootApplication(scanBasePackages = {"com.ascending.training"})
 @ServletComponentScan(basePackages = {"com.ascending.training.filter"})
 public class AppInitializer extends SpringBootServletInitializer{

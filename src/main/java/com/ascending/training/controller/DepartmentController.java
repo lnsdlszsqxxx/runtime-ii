@@ -31,7 +31,7 @@ public class DepartmentController{
     }
 
     //{} means deptName is a variable
-//    @Cacheable(value = "departments")
+    @Cacheable(value = "departments")
     @GetMapping(value = "/{deptname}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public Department getDepartmentByName(@PathVariable(name = "deptname") String deptName1){
         return  departmentService.getDepartmentByName(deptName1);

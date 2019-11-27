@@ -81,6 +81,12 @@ public class Department implements Serializable {
 }
 ```
 
+Or other wise you may get the following error:
+
+```
+Request processing failed; nested exception is org.springframework.data.redis.serializer.SerializationException: Cannot deserialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to deserialize payload. Is the byte array a result of corresponding serialization for DefaultDeserializer?; nested exception is java.io.InvalidClassException: com.ascending.training.model.Department; class invalid for deserialization
+```
+
 ## An example for Read-Through Cache
 1. add @Cacheable(value = "departments") in front of getDepartmentByName method in the DepartmentController
 
