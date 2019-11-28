@@ -31,10 +31,14 @@ public class DepartmentController{
     }
 
     //{} means deptName is a variable
-    @Cacheable(value = "departments")
+//    @Cacheable(value = "depts")
     @GetMapping(value = "/{deptname}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public Department getDepartmentByName(@PathVariable(name = "deptname") String deptName1){
-        return  departmentService.getDepartmentByName(deptName1);
+        float t1 =System.nanoTime();
+        Department department = departmentService.getDepartmentByName(deptName1);
+        float t2 =System.nanoTime();
+        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>request takes: "+(t2-t1)+" nano seconds.");
+        return  department;
     }
     
 //    @CachePut(value = "departments", key = "#department.id", unless = "#department.name == null")

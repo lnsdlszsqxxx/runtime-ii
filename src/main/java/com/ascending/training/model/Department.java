@@ -12,7 +12,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name="departments")
-public class Department{
+public class Department implements Serializable{
 
     @Id //mark primary key
 //    @SequenceGenerator(name = "department_id_generator", sequenceName = "department_id_seq", allocationSize = 1)
