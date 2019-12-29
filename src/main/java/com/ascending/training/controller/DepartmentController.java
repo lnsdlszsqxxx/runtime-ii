@@ -40,6 +40,12 @@ public class DepartmentController{
         logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>request takes: "+(t2-t1)+" nano seconds.");
         return  department;
     }
+
+
+    @RequestMapping(value="/aaa/{text:[a-z-]+}.{number:[\\d]+}")
+    public String regex(@PathVariable String text, @PathVariable String number){
+        return "succcccc"+text+" "+number;
+    }
     
 //    @CachePut(value = "departments", key = "#department.id", unless = "#department.name == null")
     @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE})
