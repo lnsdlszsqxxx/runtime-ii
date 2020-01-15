@@ -34,10 +34,7 @@ public class DepartmentController{
 //    @Cacheable(value = "depts")
     @GetMapping(value = "/{deptname}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public Department getDepartmentByName(@PathVariable(name = "deptname") String deptName1){
-        float t1 =System.nanoTime();
         Department department = departmentService.getDepartmentByName(deptName1);
-        float t2 =System.nanoTime();
-        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>request takes: "+(t2-t1)+" nano seconds.");
         return  department;
     }
 
@@ -47,7 +44,7 @@ public class DepartmentController{
         return "succcccc"+text+" "+number;
     }
     
-//    @CachePut(value = "departments", key = "#department.id", unless = "#department.name == null")
+    @CachePut(value = "departments", key = "#department.id", unless = "#department.name == null")
     @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public String creatDepartment(@RequestBody Department department){
         logger.info("Department: "+department.toString());

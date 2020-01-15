@@ -21,12 +21,12 @@ public class SecurityFilter implements Filter {
 //    Logger logger;
 
     private static String AUTH_URI = "/auth";
+//    private static String AUTH_URI = "/hello";
 
     @Override
     public void init(FilterConfig filterConfig) {
         // TODO Auto-generated method stub
         logger.info("This is from SecurityFilter init");
-
     }
 
     @Override

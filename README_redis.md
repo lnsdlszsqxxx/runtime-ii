@@ -1,4 +1,4 @@
-# How to use redis in Spring Boot
+# How to use redis in Spring Boot ([see my blog](https://blog.frugalops.com/how-to-integrate-redis-with-springboot/))
 
 ## What is cache
 
